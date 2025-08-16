@@ -1,7 +1,7 @@
-const express = require('express');
-const app = express();
-const signupRouter = require('./routes/signup');
+import express from "express";
+import signupRouter from "./routes/signup.ts";
 
+const app = express();
 
 app.use(express.json());
 app.use("/api/signup", signupRouter);
