@@ -26,6 +26,7 @@
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": false,
+    "experimentalDecorators": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
