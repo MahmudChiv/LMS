@@ -24,12 +24,7 @@ export const signupValidation = [
   body("gender")
     .notEmpty()
     .withMessage("Gender is required")
-    .isIn(["male", "female", "other"])
-    .withMessage("Gender must be either male, female, or other"),
-  body("studentId")
-    .notEmpty()
-    .withMessage("Student ID is required")
-    .isAlphanumeric()
-    .withMessage("Student ID must be alphanumeric"),
+    .isIn(["Male", "Female", "Other"])
+    .withMessage("Gender must be either Male, Female, or Other"),
 ];
 

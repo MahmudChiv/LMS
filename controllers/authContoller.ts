@@ -7,7 +7,7 @@ interface SignupRequestBody {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  gender: "male" | "female" | "other";
+  gender: string;
 }
 
 const signupContoller = async (
@@ -28,13 +28,11 @@ const signupContoller = async (
       lastName,
       dateOfBirth,
       gender,
-      studentId: UUIDV4(),
     });
-
     res.status(200).json({ message: "Signup successful", student: newStudent });
   } catch (error) {
     console.error("Error during signup:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Unable to signup"});
   }
 };
 
