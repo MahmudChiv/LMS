@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
-import { Student } from "../models/Student";
+import { Student, Gender} from "../models/Student";
 import { validationResult } from "express-validator";
-import { UUIDV4 } from "sequelize";
+import bcrypt from "bcrypt";
 
 interface SignupRequestBody {
   firstName: string;
   lastName: string;
+  email: string;
+  password: string;
   dateOfBirth: string;
-  gender: string;
+  gender: Gender;
+}
+
+interface LoginRequestBody {
+  email: string;
+  password: string;
 }
 
 const signupContoller = async (
@@ -21,11 +28,14 @@ const signupContoller = async (
   }
 
   try {
-    const { firstName, lastName, dateOfBirth, gender } = req.body;
+    const { firstName, lastName, email, password, dateOfBirth, gender } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     const newStudent = await Student.create({
       firstName,
       lastName,
+      email,
+      password: hashedPassword,
       dateOfBirth,
       gender,
     });
@@ -35,5 +45,18 @@ const signupContoller = async (
     res.status(500).json({ message: "Unable to signup"});
   }
 };
+
+const loginController = async (req: Request<{}, {}, LoginRequestBody>, res: Response) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    
+  } catch (error) {
+    
+  }
+}
 
 export default { signupContoller };

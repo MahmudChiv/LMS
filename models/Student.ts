@@ -1,4 +1,16 @@
-import { Table, Column, Model, DataType, PrimaryKey } from "sequelize-typescript";
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  PrimaryKey,
+} from "sequelize-typescript";
+
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Other = "other",
+}
 
 @Table
 export class Student extends Model {
@@ -15,21 +27,34 @@ export class Student extends Model {
   lastName!: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  email!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  password!: string;
+
+  @Column({
     type: DataType.STRING, // stored as text
     allowNull: false,
   })
   dateOfBirth!: string;
 
   @Column({
-    type: DataType.ENUM("Male", "Female", "Other"),
+    type: DataType.ENUM(...Object.values(Gender)),
     allowNull: false,
   })
-  gender!: "Male" | "Female" | "Other";
+  gender!: Gender;
 
   @PrimaryKey
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
   })
-  studentId!: string;
+  id!: string;
 }
