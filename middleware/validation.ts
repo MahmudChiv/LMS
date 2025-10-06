@@ -21,9 +21,7 @@ export const signupValidation = [
     .withMessage("Date of birth is required")
     .isISO8601()
     .withMessage("Date of birth must be a valid ISO 8601 date"),
-  body("gender")
-    .notEmpty()
-    .withMessage("Gender is required"),
+  body("gender").notEmpty().withMessage("Gender is required"),
   body("email")
     .trim()
     .notEmpty()
@@ -45,6 +43,6 @@ export const LoginValidation = [
     .withMessage("Email your email")
     .isEmail()
     .withMessage("Invalid email format"),
-    
+
   body("password").trim().notEmpty().withMessage("Your Password is required"),
 ];
