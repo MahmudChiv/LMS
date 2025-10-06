@@ -16,7 +16,7 @@ async function main() {
     await sequelize.authenticate();
     console.log("DB authenticated")
     sequelize.addModels([Student]);
-    await sequelize.sync({ alter: true, force: true }); 
+    await sequelize.sync({ alter: true }); 
     console.log("✅ Database synced successfully!");
   } catch (err) {
     console.error("❌ DB Error:", err);
