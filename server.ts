@@ -1,7 +1,7 @@
 import express from "express";
 import signup from "./routes/signup";
 import sequelize from "./config/db";
-import { Student } from "./models/Student";
+import {Student} from "./models/Student";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,9 +13,11 @@ app.use("/auth/signup", signup);
 
 async function main() {
   try {
+    await sequelize.authenticate();
+    console.log("DB authenticated")
     sequelize.addModels([Student]);
     await sequelize.sync({ alter: true }); 
-    console.log("✅ Database connected and synced!");
+    console.log("✅ Database synced successfully!");
   } catch (err) {
     console.error("❌ DB Error:", err);
   }
