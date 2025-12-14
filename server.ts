@@ -1,7 +1,7 @@
 import express from "express";
-import signup from "./routes/signup";
-import sequelize from "./config/db";
-import {Student} from "./models/Student";
+import authRoutes from "./src/routes/auth";
+import sequelize from "./src/config/db";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,13 +9,14 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use("/auth/signup", signup);
+app.use(cors());
+
+app.use("/api/auth", authRoutes);
 
 async function main() {
   try {
     await sequelize.authenticate();
     console.log("DB authenticated")
-    sequelize.addModels([Student]);
     await sequelize.sync({ alter: true }); 
     console.log("✅ Database synced successfully!");
   } catch (err) {
