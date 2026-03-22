@@ -14,13 +14,6 @@ export enum Gender {
 
 @Table
 export class Student extends Model {
-  @PrimaryKey
-  @Column({
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-  })
-  id!: string;
-  
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -57,4 +50,11 @@ export class Student extends Model {
     allowNull: false,
   })
   gender!: Gender;
+
+  @PrimaryKey
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+  })
+  id!: string;
 }
